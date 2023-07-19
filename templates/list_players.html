@@ -1,0 +1,41 @@
+{% extends 'layout_table.html' %}
+{% block title %}Players list{% endblock %}
+
+{% block header %}
+<h1>JS game</h1>
+{% endblock %}
+
+{% block nav %}
+    <ul>
+        <li><a href="/logout">Logout</a><li>
+        <li><a href="/">Main page</a></li>
+    </ul>
+{% endblock %}
+
+{% block main %}
+    <h2>Players List</h2>
+    <table class="main_table" >
+        <thead>
+            <tr>
+                {% for header in LIST_PLAYERS_HEADERS %}
+                <th>
+                    {{ header }}
+                </th>
+                {% endfor %}
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for player in players %}
+            <tr>
+                <td class="title" ><a href="/player/{{ player.id }}"></a>
+                </td>
+                <td>{{ player.player_name }}</td>
+                <td>{{ player.results }}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br><br><br><br><br><br><br>
+{% endblock %}

@@ -1,9 +1,8 @@
 import bcrypt as bcrypt
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, session
 
-# import data_manager
-# import util
-# import config
+import data_manager, connection
+import config
 
 app = Flask(__name__)
 app.secret_key = "96449384-97ca-4e24-bdec-58a7dc8f59fc"
@@ -14,7 +13,7 @@ def registration():
     if request.method == 'GET':
         return render_template("registration.html")
     else:
-        username = request.form['username']
+        player_name = request.form['player_name']
         email = request.form['email']
         password = request.form['password']
         repeat_password = request.form['repeat_password']
@@ -27,18 +26,18 @@ def registration():
         if len(password) not in config.PASSWORD_LENGTH:
             errors.append(f"Password should have from {config.PASSWORD_LENGTH_MIN} to {config.PASSWORD_LENGTH_MAX} "
                           f"characters.")
-        if len(username) not in config.USERNAME_LENGTH:
+        if len(player_name) not in config.USERNAME_LENGTH:
             errors.append(f"Username should have from {config.USERNAME_LENGTH_MIN} to {config.USERNAME_LENGTH_MAX} "
                           f"characters.")
-        if data_manager.get_user_by_name(username, email):
+        if data_manager.get_player_by_name(player_name, email):
             errors.append("User with this name or email already exists.")
         if len(errors):
             return render_template("registration.html", errors=errors)
 
         hashed_password = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
-        user_id = data_manager.add_user(username, email, hashed_password.decode("utf-8"))
+        player_id = data_manager.add_player(player_name, email, hashed_password.decode("utf-8"))
 
-        if user_id:
+        if player_id:
             return render_template("registration_confirm.html")
         else:
             return render_template("registration.html", errors='Unknown error, please try later.')
@@ -49,20 +48,53 @@ def login():
     if request.method == 'GET':
         return render_template("login.html")
     else:
-        username_email = request.form['username_email']
+        player_name_email = request.form['player_name_email']
         password = request.form['password']
         errors = []
-        user = data_manager.get_user_by_name(username_email, username_email)
-        if not user:
-            errors.append(f'{username_email} not exist')
+        player = data_manager.get_player_by_name(player_name_email, player_name_email)
+        if not player:
+            errors.append(f'{player_name_email} not exist')
             return render_template("login.html", errors=errors)
 
-        is_password_correct = bcrypt.checkpw(password.encode("utf-8"), user['password'].encode("utf-8"))
+        is_password_correct = bcrypt.checkpw(password.encode("utf-8"), player['password'].encode("utf-8"))
 
         if is_password_correct:
-            session['username_email'] = username_email
+            session['player_name_email'] = player_name_email
             session['is_logged'] = True
-            session['user_id'] = user['id']
-            return redirect(f"/user/{user['id']}")
+            session['player_id'] = player['id']
+            return redirect(f"/player/{player['id']}")
         else:
             return render_template("login.html", errors=['Password incorrect!'])
+
+
+@app.route('/')
+def main_page():
+    return render_template('main.html',is_logged=is_logged())
+
+
+
+def is_logged():
+    return "is_logged" in session and session["is_logged"]
+
+
+@app.route('/logout', methods=['GET'])
+def logout():
+    session.clear()
+    return redirect("/")
+
+
+
+@app.route('/player/<player_id>')
+@connection.is_logged_in
+def player_detail_page(player_id):
+    players = data_manager.get_players_list()
+    player = next(player for player in players if player['id'] == int(player_id))
+    return render_template('player_page.html', player=player)
+
+
+
+@app.route('/players')
+@connection.is_logged_in
+def list_players():
+    players = data_manager.get_players_list()
+    return render_template('list_players.html', players=players, LIST_PLAYERS_HEADERS=config.LIST_PLAYERS_HEADERS)

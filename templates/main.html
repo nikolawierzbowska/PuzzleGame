@@ -1,0 +1,24 @@
+{% extends 'layout_table.html' %}
+{% block title %}JS game Main{% endblock %}
+
+{% block header %}
+<h1>JS game</h1>
+{% endblock %}
+
+{% block nav %}
+    {% if is_logged %}
+     <ul>
+         <li><a href="/logout">Logout</a><li>
+         <li><a href="/players">Players</a></li>
+     </ul>
+    {% else %}
+        <ul>
+            <li><a href="/registration">Registration</a></li>
+            <li><a href="/login">Login</a></li>
+        </ul>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+{% endblock %}
+
