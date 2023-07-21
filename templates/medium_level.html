@@ -1,0 +1,24 @@
+{% extends 'layout_table.html' %}
+{% block title %}Level medium{% endblock %}
+
+{% block header %}
+<h1>Let's play Puzzle</h1>
+{% endblock %}
+
+{% block nav %}
+
+     <ul>
+         <li class="logged_players"> Hello {{ session['player_name_email']  }}!</li>
+         <li><a href="/logout">Logout</a><li>
+         <ul><li><a href="/">Main page</a></li></ul>
+         <li class="newGame"><a href="/difficulty_games">New game</a></li>
+     </ul>
+
+{% endblock %}
+
+{% block main %}
+    <h2>Please chose the level</h2>
+
+<br><br><br><br><br><br>
+{% endblock %}
+

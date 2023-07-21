@@ -2,13 +2,15 @@
 {% block title %}Players list{% endblock %}
 
 {% block header %}
-<h1>JS game</h1>
+<h1>Let's play Puzzle</h1>
 {% endblock %}
 
 {% block nav %}
     <ul>
+        <li class="logged_players"> Hello {{ session['player_name_email']  }}!</li>
         <li><a href="/logout">Logout</a><li>
         <li><a href="/">Main page</a></li>
+        <li><a href="/player/{{player_id}}">Player info</a></li>
     </ul>
 {% endblock %}
 
@@ -28,8 +30,6 @@
         <tbody>
             {% for player in players %}
             <tr>
-                <td class="title" ><a href="/player/{{ player.id }}"></a>
-                </td>
                 <td>{{ player.player_name }}</td>
                 <td>{{ player.results }}</td>
 

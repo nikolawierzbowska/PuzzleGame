@@ -72,7 +72,6 @@ def main_page():
     return render_template('main.html',is_logged=is_logged())
 
 
-
 def is_logged():
     return "is_logged" in session and session["is_logged"]
 
@@ -97,4 +96,33 @@ def player_detail_page(player_id):
 @connection.is_logged_in
 def list_players():
     players = data_manager.get_players_list()
-    return render_template('list_players.html', players=players, LIST_PLAYERS_HEADERS=config.LIST_PLAYERS_HEADERS)
+    player_id = session['player_id']
+    return render_template('list_players.html', players=players, player_id= player_id, LIST_PLAYERS_HEADERS=config.LIST_PLAYERS_HEADERS)
+
+
+
+@app.route('/difficulty_games')
+@connection.is_logged_in
+def chose_difficulty_game():
+    return render_template('difficulty.html')
+
+
+
+@app.route('/easy_level')
+@connection.is_logged_in
+def easy_level():
+    return render_template('easy_level.html')
+
+
+
+@app.route('/medium_level')
+@connection.is_logged_in
+def medium_level():
+    return render_template('medium_level.html')
+
+
+
+@app.route('/hard_level')
+@connection.is_logged_in
+def hard_level():
+    return render_template('hard_level.html')

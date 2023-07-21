@@ -1,0 +1,207 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    font-size: 10px;
+    font-family: 'Consolas', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+}
+
+
+.header {
+    height: 30vh;
+    background-image: url('image/puzzle-pieces-gabf28f7b2_1280.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(60%);
+
+}
+
+.header h1 {
+    font-size: 8rem;
+    color: white;
+    font-weight: bold;
+    line-height: 30vh;
+    background-color: black;
+    display: inline;
+}
+
+
+h1 {
+
+    margin-left: 22vw;
+    margin-right:22vw;
+
+}
+
+
+nav {
+    margin: 4px auto;
+    padding: 5px;
+    text-align: left;
+    max-width: 1440px;
+    border-bottom: black solid 1px;
+
+}
+
+
+.nav ul {
+    list-style: none;
+}
+
+
+.nav ul li {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+nav a {
+    display: inline-block;
+    font-size: 2.2rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Consolas', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+    color: black;
+    padding: 10px 20px;
+    margin: 5px 20px;
+}
+
+nav a:hover {
+    border-bottom:  2px solid;
+    color: black;
+    font-weight: bold;
+}
+
+.logged_players {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin: auto 25px auto 20px;
+    padding: 5px;
+    border-bottom:  solid 1px  #ff5a1e;
+}
+
+
+.footer {
+    font-size: 2rem;
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding: 2rem 0;
+
+}
+
+.main {
+    text-align: center;
+    font-size: 2rem;
+
+}
+
+.main h2 {
+    font-size: 6vh;
+    font-weight: bold;
+    color: black;
+    margin: 10px auto 20px auto;
+    padding: 5px;
+}
+
+
+.main label {
+    display: block;
+    margin: 5px auto 2px auto;
+    padding: 5px;
+
+}
+
+#player_name, #email, #password, #repeat_password, #player_name_email, #title {
+    height: 6vh;
+    margin: 0 auto 5px auto;
+    border-radius: 10px;
+    text-align: center;
+    border-width: 2px;
+    border-color: rgba(255, 109, 30, 0.47);
+    font-size: 2rem;
+}
+
+
+#register, #login {
+    width: 8vw;
+    margin: 20px 10px;
+    padding: 5px;
+    border-radius: 10px;
+    letter-spacing: 1px;
+    font-size: 2vh;
+    background-color: #ff6d1e;
+    text-align: center;
+    font-weight: bold;
+}
+
+#login {
+    margin: 20px 10px 100px 10px;
+    font-size: 2.3vh;
+}
+
+
+#register:hover, #login:hover {
+    background-color: #ff5a1e;
+}
+
+
+.main_table {
+    border-collapse: collapse;
+    margin: 8px auto;
+    padding: 5px;
+    width: 70vw;
+    table-layout: fixed;
+    letter-spacing: 0;
+    word-wrap: break-word;
+    vertical-align: middle;
+
+}
+
+
+th {
+    background-color: rgba(255, 109, 30, 0.93);
+    color: white;
+    margin: 8px;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+
+td {
+    font-size: 2rem;
+    margin: 8px;
+    padding: 5px;
+    font-weight: bold;
+}
+
+
+tr {
+    background-color: white;
+}
+
+tr:nth-child(even) {
+    background-color: rgb(255, 222, 204)
+}
+
+
+.levelButton {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 20px;
+    margin-top: 100px;
+    padding: 15px;
+    width: 300px;
+}
+
+
+.newGame {
+    border-bottom: none;
+    color: black;
+
+
+}
