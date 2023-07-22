@@ -1,4 +1,7 @@
+import os
+
 import bcrypt as bcrypt
+import flask
 from flask import Flask, render_template, request, redirect, session
 
 import data_manager, connection
@@ -126,3 +129,10 @@ def medium_level():
 @connection.is_logged_in
 def hard_level():
     return render_template('hard_level.html')
+
+
+@app.route('/image')
+@connection.is_logged_in
+def image():
+    image_files = os.listdir('static/image')
+    return flask.jsonify(image_files)

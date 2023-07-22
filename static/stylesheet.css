@@ -11,28 +11,29 @@ html {
 
 .header {
     height: 30vh;
-    background-image: url('image/puzzle-pieces-gabf28f7b2_1280.jpg');
+    background-image: url('puzzle-pieces-gabf28f7b2_1280.jpg');
     background-size: cover;
     background-position: center;
     filter: brightness(60%);
 
+
 }
 
 .header h1 {
-    font-size: 8rem;
+    font-size: 7rem;
     color: white;
     font-weight: bold;
     line-height: 30vh;
     background-color: black;
     display: inline;
+
+
 }
 
 
 h1 {
-
     margin-left: 22vw;
     margin-right:22vw;
-
 }
 
 
@@ -159,6 +160,7 @@ nav a:hover {
     word-wrap: break-word;
     vertical-align: middle;
 
+
 }
 
 
@@ -177,6 +179,7 @@ td {
     margin: 8px;
     padding: 5px;
     font-weight: bold;
+    text-align: center;
 }
 
 
@@ -192,8 +195,23 @@ tr:nth-child(even) {
 .levelButton {
     font-size: 2rem;
     font-weight: bold;
-    margin: 20px;
-    margin-top: 100px;
+    margin:100px 20px 20px 20px;
     padding: 15px;
     width: 300px;
 }
+
+
+.pictures {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 500px);
+    justify-content: center;
+}
+
+
+.pictures div img {
+    width: 400px;
+    height: 400px;
+    margin: 20px 40px;
+    padding: 10px;
+
+ }

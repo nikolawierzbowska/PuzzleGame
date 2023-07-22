@@ -25,8 +25,6 @@ newGame.addEventListener("mouseout", (event) => {
 
 
 
-
-
 function SortResultsUp() {
   let table, rows, switching, i ,x ,y, shouldSwitch;
   table = document.querySelector(".main_table");
@@ -74,3 +72,35 @@ function SortResultsDown() {
   }
 }
 
+
+pictures = document.querySelector(".pictures")
+locateImages()
+
+async function getImages(){
+  const images = await fetch('/image')
+      .then(response => response.json())
+  return images
+}
+
+
+function creteImagesContainer(imageFileName) {
+  const imageContainer = document.createElement("div")
+  imageContainer.classList.add("imageContainer")
+
+  const imagePuzzle= document.createElement("img")
+  imagePuzzle.setAttribute("src", 'static/image/'+ imageFileName)
+
+  imageContainer.appendChild(imagePuzzle)
+  return imageContainer;
+}
+
+
+function  locateImages() {
+  getImages()
+      .then(images => {
+        images.forEach(img => {
+            const imageContainer = creteImagesContainer(img);
+            pictures.appendChild(imageContainer)
+        })
+      })
+}
