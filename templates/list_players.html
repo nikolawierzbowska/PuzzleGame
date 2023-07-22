@@ -19,11 +19,13 @@
     <table class="main_table" >
         <thead>
             <tr>
-                {% for header in LIST_PLAYERS_HEADERS %}
-                <th>
-                    {{ header }}
+                <th>PLAYER NAME<th>
+                    RESULTS
+                <button onclick = SortResultsUp()> &#129093;</button>
+                 <button onclick = SortResultsDown()> &#129095;</button>
+
                 </th>
-                {% endfor %}
+
             </tr>
         </thead>
 
@@ -31,7 +33,8 @@
             {% for player in players %}
             <tr>
                 <td>{{ player.player_name }}</td>
-                <td>{{ player.results }}</td>
+                <td  class="results">{{ player.results }}
+                </td>
 
             </tr>
             {% endfor %}

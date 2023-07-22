@@ -27,3 +27,12 @@ def get_players_list(cursor):
                    FROM players
                      """)
     return cursor.fetchall()
+
+
+@connection.connection_handler
+def get_players_results(cursor):
+    cursor.execut("""
+                 SELECT results
+                 FROM players
+                 """)
+    return cursor.fetchall()
