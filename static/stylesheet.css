@@ -1,6 +1,7 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 
 html {
@@ -15,8 +16,6 @@ html {
     background-size: cover;
     background-position: center;
     filter: brightness(60%);
-
-
 }
 
 .header h1 {
@@ -26,8 +25,6 @@ html {
     line-height: 30vh;
     background-color: black;
     display: inline;
-
-
 }
 
 
@@ -43,7 +40,6 @@ nav {
     text-align: left;
     max-width: 1440px;
     border-bottom: black solid 1px;
-
 }
 
 
@@ -70,11 +66,13 @@ nav a {
     margin: 5px 20px;
 }
 
+
 nav a:hover {
     border-bottom:  2px solid;
     color: black;
     font-weight: bold;
 }
+
 
 .logged_players {
     font-size: 2.2rem;
@@ -91,7 +89,6 @@ nav a:hover {
     background-color: black;
     color: white;
     padding: 2rem 0;
-
 }
 
 .main {
@@ -101,7 +98,7 @@ nav a:hover {
 }
 
 .main h2 {
-    font-size: 6vh;
+    font-size: 7vh;
     font-weight: bold;
     color: black;
     margin: 10px auto 20px auto;
@@ -113,8 +110,8 @@ nav a:hover {
     display: block;
     margin: 5px auto 2px auto;
     padding: 5px;
-
 }
+
 
 #player_name, #email, #password, #repeat_password, #player_name_email, #title {
     height: 6vh;
@@ -139,6 +136,7 @@ nav a:hover {
     font-weight: bold;
 }
 
+
 #login {
     margin: 20px 10px 100px 10px;
     font-size: 2.3vh;
@@ -159,8 +157,6 @@ nav a:hover {
     letter-spacing: 0;
     word-wrap: break-word;
     vertical-align: middle;
-
-
 }
 
 
@@ -208,10 +204,46 @@ tr:nth-child(even) {
 }
 
 
-.pictures div img {
+.pictures img {
     width: 400px;
     height: 400px;
     margin: 20px 40px;
     padding: 10px;
 
  }
+
+
+.statistics {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 10px;
+    padding: 10px;
+}
+
+
+.board {
+    width: 650px;
+    height: 650px;
+    align-content: center;
+    justify-content: center;
+    margin: auto;
+    position: relative;
+
+}
+
+
+
+.puzzle {
+    position: absolute;
+    display: flex;
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+    color:chartreuse;
+    background: url("beach-666122_1280.jpg");
+
+}
+
+#last {
+    background: black;
+}

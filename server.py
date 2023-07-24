@@ -136,3 +136,9 @@ def hard_level():
 def image():
     image_files = os.listdir('static/image')
     return flask.jsonify(image_files)
+
+
+@app.route('/puzzle')
+@connection.is_logged_in
+def play_puzzle():
+    return render_template('easy_grid.html')
