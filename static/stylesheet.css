@@ -197,14 +197,14 @@ tr:nth-child(even) {
 }
 
 
-.pictures {
+.pictures, .picturesHardLevel {
     display: grid;
     grid-template-columns: repeat(auto-fill, 500px);
     justify-content: center;
 }
 
 
-.pictures img {
+.pictures img, .picturesHardLevel img {
     width: 400px;
     height: 400px;
     margin: 20px 40px;
@@ -222,12 +222,13 @@ tr:nth-child(even) {
 
 
 .board {
-    width: 650px;
-    height: 650px;
+    width: 600px;
+    height: 600px;
     align-content: center;
     justify-content: center;
     margin: auto;
     position: relative;
+    display: block;
 
 }
 
@@ -240,10 +241,6 @@ tr:nth-child(even) {
     width: 200px;
     border: 1px solid black;
     color:chartreuse;
-    background: url("beach-666122_1280.jpg");
+    background-image: url("image/beach-666122_1280.jpg");
 
-}
-
-#last {
-    background: black;
 }

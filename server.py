@@ -118,13 +118,6 @@ def easy_level():
 
 
 
-@app.route('/medium_level')
-@connection.is_logged_in
-def medium_level():
-    return render_template('medium_level.html')
-
-
-
 @app.route('/hard_level')
 @connection.is_logged_in
 def hard_level():
@@ -142,3 +135,9 @@ def image():
 @connection.is_logged_in
 def play_puzzle():
     return render_template('easy_grid.html')
+
+
+@app.route('/hardlevel')
+@connection.is_logged_in
+def play_puzzle_hard():
+    return render_template('hard_grid.html')

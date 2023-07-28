@@ -1,244 +1,246 @@
+let steps = 0
+
 newGameEvent()
 choseLevelEvent()
+
 const pictures = document.querySelector(".pictures")
+// const picturesHardlevel = document.querySelector(".picturesHardLevel")
+
 locateImages()
+// locateImagesHardLevel()
 initGame()
 
-let steps  = 0
-statistics()
 
+function choseLevelEvent() {
+    const arrayButton = document.querySelectorAll(".levelButton")
+    for (const element of arrayButton) {
+        element.addEventListener("mouseover", (event) => {
+            event.target.style.backgroundColor = '#ff5a1e';
+        });
 
-function choseLevelEvent(){
-  const arrayButton = document.querySelectorAll(".levelButton")
-  for(const element of arrayButton) {
-    element.addEventListener("mouseover", (event) => {
-      event.target.style.backgroundColor ='#ff5a1e'; });
-
-    element.addEventListener("mouseout",(event) => {
-      event.target.style.backgroundColor ="";})
-  }
+        element.addEventListener("mouseout", (event) => {
+            event.target.style.backgroundColor = "";
+        })
+    }
 }
 
 
 function newGameEvent() {
-  const newGame = document.querySelector(".newGame")
-  newGame.addEventListener("mouseover", (event) => {
-    event.target.style.color ='#ff5a1e';});
+    const newGame = document.querySelector(".newGame")
+    newGame.addEventListener("mouseover", (event) => {
+        event.target.style.color = '#ff5a1e';
+    });
 
-  newGame.addEventListener("mouseout", (event) => {
-    event.target.style.color ='';})
+    newGame.addEventListener("mouseout", (event) => {
+        event.target.style.color = '';
+    })
 }
 
 
 function SortResultsUp() {
-  let table, rows, switching, i ,x ,y, shouldSwitch;
-  table = document.querySelector(".main_table");
-  switching = true;
-  while (switching) {
-    switching = false;
-    rows = table.rows;
-    for (i = 1; i< (rows.length - 1); i++) {
-      shouldSwitch = false;
-      x = parseInt(rows[i].querySelector(".results").textContent);
-      y = parseInt(rows[i+1].querySelector(".results").textContent);
-      if (x < y) {
-        shouldSwitch = true;
-        break;
-      }
+    let table, rows, switching, i, x, y;
+    table = document.querySelector(".main_table");
+    switching = true;
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+            x = parseInt(rows[i].querySelector(".results").textContent);
+            y = parseInt(rows[i + 1].querySelector(".results").textContent);
+            if (x < y) {
+                table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
+                switching = true;
+            }
+        }
     }
-    if (shouldSwitch) {
-      table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
-      switching = true;
-    }
-  }
 }
 
 
 function SortResultsDown() {
-  let table, rows, switching, i ,x ,y, shouldSwitch;
-  table = document.querySelector(".main_table");
-  switching = true;
-  while (switching) {
-    switching = false;
-    rows = table.rows;
-    for (i = 1; i< (rows.length - 1); i++) {
-      shouldSwitch = false;
-      x = parseInt(rows[i].querySelector(".results").textContent);
-      y = parseInt(rows[i+1].querySelector(".results").textContent);
-      if (x > y) {
-        shouldSwitch = true;
-        break;
-      }
+    let table, rows, switching, i, x, y;
+    table = document.querySelector(".main_table");
+    switching = true;
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+            x = parseInt(rows[i].querySelector(".results").textContent);
+            y = parseInt(rows[i + 1].querySelector(".results").textContent);
+            if (x > y) {
+                table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
+                switching = true;
+            }
+        }
     }
-    if (shouldSwitch) {
-      table.rows[i].parentNode.insertBefore(table.rows[i + 1], table.rows[i]);
-      switching = true;
-    }
-  }
 }
 
-
-
-
-locateImages()
-
-async function getImages(){
-  const images = await fetch('/image')
-      .then(response => response.json())
-  return images
+async function getImages() {
+    const images = await fetch('/image')
+        .then(response => response.json())
+    return images
 }
 
 
 function creteImagesContainer(imageFileName) {
-  const imageContainer = document.createElement("div")
-  imageContainer.classList.add("imageContainer")
+    const imageContainer = document.createElement("div")
+    imageContainer.classList.add("imageContainer")
 
-  const imagePuzzle= document.createElement("img")
-  imagePuzzle.setAttribute("src", 'static/image/'+ imageFileName);
-  imageContainer.appendChild(imagePuzzle);
+    const imagePuzzle = document.createElement("img")
+    imagePuzzle.setAttribute("src", 'static/image/' + imageFileName);
 
+    imagePuzzle.addEventListener("click", clicks)
 
-  return imageContainer;
+    imageContainer.appendChild(imagePuzzle);
+    imageContainer.style.order = Math.floor(Math.random() * 100)
+    return imageContainer;
 }
 
 
-function  locateImages() {
-  getImages()
-      .then(images => {
-        images.forEach(img => {
-            const imageContainer = creteImagesContainer(img);
-            pictures.appendChild(imageContainer)
+function locateImages() {
+    getImages()
+        .then(images => {
+            images.forEach(img => {
+                const imageContainer = creteImagesContainer(img);
+                pictures.appendChild(imageContainer)
+            })
         })
-      })
 }
 
-
-// function openWebsiteToPuzzle(event) {
-//     const clickedImage = event.target;
-//     const imageUrl = clickedImage.src;
-//     const targetUrl = 'http://127.0.0.1:5000/puzzle';
-//
-//     window.open(targetUrl, '_self');
-// }
-//  imagePuzzle= document.createElement("img")
-//
-// const imagePuzzles = pictures.getElementsByTagName("img")
-//
-//
-// for( const img of imagePuzzles) {
-//     img.addEventListener("click", openWebsiteToPuzzle)
+// function locateImagesHardLevel() {
+//     getImages()
+//         .then(images => {
+//             images.forEach(img => {
+//                 const imageContainer = creteImagesContainer(img);
+//                 picturesHardlevel.appendChild(imageContainer)
+//             })
+//         })
 // }
 
 
+function clicks(event) {
+    const pic = event.target.closest(".imageContainer")
+    if (pic) {
+        if (event.target.tagName === 'IMG') {
+            const {src} = event.target;
+            window.location.href = `http://127.0.0.1:5000/puzzle?img=${encodeURIComponent(src)}`;
+        }
+    }
+}
+
+function updatePuzzleBackground() {
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const imgSrc = urlParams.get('img');
+
+    if (imgSrc) {
+        const puzzleDivs = document.querySelectorAll('.puzzle');
+
+        puzzleDivs.forEach((puzzleDiv) => {
+            puzzleDiv.style.backgroundImage = `url(${imgSrc})`;
+
+            const lastPuzzle = document.querySelector("#last")
+            lastPuzzle.style.backgroundImage = "none"
+        });
+
+    }
+}
 
 
 function initGame() {
-  const puzzles =document.querySelectorAll(".puzzle");
-  const board = document.querySelector(".board");
+    const board = document.querySelector(".board");
+    // const boardHardLevel = document.querySelector(".boardHardLevel");
 
-   // board.style.order =Math.ceil(Math.random()*10)
-
-  const puzzlesState = [
-      [puzzles[0], puzzles[1], puzzles[2]],
-      [puzzles[3], puzzles[4], puzzles[5]],
-      [puzzles[6], puzzles[7], puzzles[8]]
-  ];
+    const puzzleArray = Array.from(document.querySelector('.board').children)
+    console.log(puzzleArray)
+    // let puzzleArrayHard = Array.from(document.querySelector('.boardHardLevel').children)
 
 
+    let puzzleState = []
+    for (let i = 0; i < puzzleArray.length; i += 3) {
+        let row = puzzleArray.slice(i, i + 3);
+        puzzleState.push(row);
+    }
 
-  function newBoard(board, puzzleState) {
-    puzzleState.forEach((row, rowIndex) => {
-      row.forEach((column, columnIndex) => {
-          column.style.top = `${rowIndex*200}px`;
-          column.style.left = `${columnIndex*200}px`;
 
-      column.style['background-position-y'] =`-${rowIndex*200}px`;
-      column.style['background-position-x'] =`-${columnIndex*200}px`;
-      board.appendChild(column);
+    function createBoard(board, puzzleState) {
+        puzzleState.forEach((row, rowIndex) => {
+            row.forEach((column, columnIndex) => {
 
-      });
+                let reversedRowIndex = puzzleState.length -1 - rowIndex;
+                let reversedColumnIndex = puzzleState.length -1 - columnIndex;
+                column.style.top = `${rowIndex * 200}px`;
+                column.style.left = `${columnIndex * 200}px`;
+                column.style['background-position-y'] = `-${reversedRowIndex * 200}px`;
+                column.style['background-position-x'] = `-${reversedColumnIndex * 200}px`;
+                board.appendChild(column);
+
+
+            });
+        });
+    }
+
+
+    function swapPuzzle(puzzle, puzzleEmpty) {
+        const tempTop = puzzle.style.top;
+        const tempLeft = puzzle.style.left;
+
+        puzzle.style.top = puzzleEmpty.style.top;
+        puzzle.style.left = puzzleEmpty.style.left;
+
+        puzzleEmpty.style.top = tempTop;
+        puzzleEmpty.style.left = tempLeft;
+    }
+
+
+    function movePuzzle(event) {
+        const puzzle = event.target;
+        let puzzleX, puzzleY
+
+        for (let i = 0; i < puzzleState.length; i++) {
+            if (puzzleState[i].includes(puzzle)) {
+                puzzleX = i;
+                puzzleY = puzzleState[i].indexOf(puzzle);
+                break;
+            }
+        }
+
+        const emptyPuzzle = document.querySelector(('#last'));
+        let puzzleEmptyX, puzzleEmptyY;
+        for (let i = 0; i < puzzleState.length; i++) {
+            if (puzzleState[i].includes(emptyPuzzle)) {
+                puzzleEmptyX = i;
+                puzzleEmptyY = puzzleState[i].indexOf(emptyPuzzle);
+                break;
+            }
+        }
+
+        if ((puzzleY === puzzleEmptyY && (puzzleX + 1 === puzzleEmptyX || puzzleX - 1 === puzzleEmptyX)) ||
+            (puzzleX === puzzleEmptyX && (puzzleY + 1 === puzzleEmptyY || puzzleY - 1 === puzzleEmptyY))
+        ) {
+            swapPuzzle(puzzleState[puzzleX][puzzleY], puzzleState[puzzleEmptyX][puzzleEmptyY])
+
+            const temp = puzzleState[puzzleX][puzzleY];
+            puzzleState[puzzleX][puzzleY] = puzzleState[puzzleEmptyX][puzzleEmptyY];
+            puzzleState[puzzleEmptyX][puzzleEmptyY] = temp;
+            steps++
+            statistics()
+
+        }
+    }
+
+    createBoard(board, puzzleState);
+
+
+    document.addEventListener("DOMContentLoaded", updatePuzzleBackground)
+
+    puzzleState.forEach(row => {
+        row.forEach(puzzle => {
+            puzzle.addEventListener('click', movePuzzle);
+        });
     });
-  }
-
-  function movePuzzle(puzzle1, puzzle2) {
-
-      const tempTop = puzzle1.style.top;
-      const tempLeft = puzzle1.style.left;
-
-      puzzle1.style.top = puzzle2.style.top;
-      puzzle1.style.left = puzzle2.style.left;
-
-      puzzle2.style.top = tempTop;
-      puzzle2.style.left = tempLeft;
-
-  }
-
-  newBoard(board, puzzlesState);
 
 
-  function clikAndCheck() {
-      board.addEventListener("click", (event) => {
-          const target = event.target;
-
-          let x, y;
-
-          puzzlesState.forEach((row, rowIndex) => {
-              row.forEach((column, columnIndex) => {
-                  if (column === target) {
-                      x = rowIndex;
-                      y = columnIndex;
-
-                  }
-              });
-          });
-
-          let emptyPuzzleX, emptyPuzzleY;
-
-          puzzlesState.forEach((row, rowIndex) => {
-              row.forEach((column, columnIndex) => {
-                  if (column.innerText === "") {
-                      emptyPuzzleX = rowIndex;
-                      emptyPuzzleY = columnIndex;
-                  }
-              });
-          });
-
-          if ((y === emptyPuzzleY && (x + 1 === emptyPuzzleX || x - 1 === emptyPuzzleX)) ||
-              (x === emptyPuzzleX && (y + 1 === emptyPuzzleY || y - 1 === emptyPuzzleY))
-          ) {
-              movePuzzle(puzzlesState[x][y], puzzlesState[emptyPuzzleX][emptyPuzzleY] )
-
-              const temp = puzzlesState[x][y];
-              puzzlesState[x][y] = puzzlesState[emptyPuzzleX][emptyPuzzleY];
-              puzzlesState[emptyPuzzleX][emptyPuzzleY] = temp;
-              steps++
-              statistics()
-          }
-      });
-
-  function statistics() {
-    document.querySelector("#steps").textContent =steps
-    // document.querySelector("#time")
-
-
+    function statistics() {
+        document.querySelector("#steps").textContent = steps
+    }
 }
-
-  }
-  clikAndCheck()
-
-
-
-
-}
-
-
-
-
-
-
-
-
-// function gameFinish {
-//   alert("Congratulations!")
-//
-// }
