@@ -1,0 +1,42 @@
+{% extends 'layout_table.html' %}
+{% block title %}Level easy{% endblock %}
+
+{% block header %}
+<h1>Let's play Puzzle</h1>
+{% endblock %}
+
+{% block nav %}
+
+     <ul>
+         <li class="logged_players"> Hello {{ session['player_name_email']  }}</li>
+         <li><a href="/logout">Logout</a><li>
+         <li><a href="/players">Players</a></li>
+         <li class="newGame"><a href="/difficulty_games">New game</a></li>
+     </ul>
+
+{% endblock %}
+
+{% block main %}
+    <h2>Good luck!</h2>
+
+<div class="board">
+<div id="1" class="puzzle">1</div>
+<div id="2" class="puzzle">2</div>
+<div id="3" class="puzzle">3</div>
+<div id="4" class="puzzle">4</div>
+<div id="5" class="puzzle">5</div>
+<div id="6" class="puzzle">6</div>
+<div id="7" class="puzzle">7</div>
+<div id="8" class="puzzle">8</div>
+<div id="9" class="puzzle">9</div>
+</div>
+
+
+    <div  class="statistics">
+        Steps: <span id="steps"></span><br>
+    </div>
+
+
+
+{% endblock %}
+

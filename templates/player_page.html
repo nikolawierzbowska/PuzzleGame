@@ -1,0 +1,35 @@
+{%  extends 'layout_table.html' %}
+{% block title %}Player page{% endblock %}
+
+{% block header %}
+<h1>Let's play Puzzle</h1>
+{% endblock %}
+
+{% block nav %}
+    <ul>
+        <li class="logged_players"> Hello {{ session['player_name_email']  }}!</li>
+         <li><a href="/logout">Logout</a><li>
+         <li><a href="/players">Players</a></li>
+         <li class="newGame"><a  href="/difficulty_games">New game</a></li>
+
+     </ul>
+{% endblock %}
+
+{% block main %}
+    <h2>Player Details</h2>
+    <br><br>
+
+    <table class="main_table">
+        <tr>
+            <th>Player ID</th>
+            <th>Player name</th>
+            <th>Results</th>
+        </tr>
+        <tr>
+            <td>{{ player.id }}</td>
+            <td>{{ player.player_name }}</td>
+            <td class="results">{{ player.results }}</td>
+        </tr>
+    </table>
+  <br><br>  <br><br>  <br><br>  <br><br><br><br><br><br>
+{% endblock %}
