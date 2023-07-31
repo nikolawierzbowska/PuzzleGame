@@ -91,7 +91,14 @@ def logout():
 def player_detail_page(player_id):
     players = data_manager.get_players_list()
     player = next(player for player in players if player['id'] == int(player_id))
+
     return render_template('player_page.html', player=player)
+
+
+@app.route('/player/<player_id>/results')
+@connection.is_logged_in
+def update_results():
+    pass
 
 
 
@@ -141,3 +148,5 @@ def play_puzzle():
 @connection.is_logged_in
 def play_puzzle_hard():
     return render_template('hard_grid.html')
+
+

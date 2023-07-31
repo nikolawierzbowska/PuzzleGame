@@ -234,13 +234,22 @@ tr:nth-child(even) {
 
 
 
+
 .puzzle {
     position: absolute;
     display: flex;
     height: 200px;
     width: 200px;
     border: 1px solid black;
-    color:chartreuse;
+    color:transparent;
     background-image: url("image/beach-666122_1280.jpg");
 
 }
+
+.begin {
+    font-size: 3rem;
+    padding: 20px;
+    margin: 150px auto 200px auto;
+    font-weight: bold;
+}
+

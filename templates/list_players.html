@@ -9,13 +9,14 @@
     <ul>
         <li class="logged_players"> Hello {{ session['player_name_email']  }}!</li>
         <li><a href="/logout">Logout</a><li>
-        <li><a href="/">Main page</a></li>
         <li><a href="/player/{{player_id}}">Player info</a></li>
+     <li class="newGame"><a  href="/difficulty_games">New game</a></li>
     </ul>
 {% endblock %}
 
 {% block main %}
     <h2>Players List</h2>
+    <br><br>
     <table class="main_table" >
         <thead>
             <tr>
@@ -32,7 +33,7 @@
         <tbody>
             {% for player in players %}
             <tr>
-                <td>{{ player.player_name }}</td>
+                <td class="name">{{ player.player_name }}</td>
                 <td  class="results">{{ player.results }}
                 </td>
 
@@ -40,5 +41,5 @@
             {% endfor %}
         </tbody>
     </table>
-    <br><br><br><br><br><br><br>
+    <br><br><br><br><br><br>
 {% endblock %}

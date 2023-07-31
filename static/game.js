@@ -4,10 +4,9 @@ newGameEvent()
 choseLevelEvent()
 
 const pictures = document.querySelector(".pictures")
-// const picturesHardlevel = document.querySelector(".picturesHardLevel")
+
 
 locateImages()
-// locateImagesHardLevel()
 initGame()
 
 
@@ -30,7 +29,6 @@ function newGameEvent() {
     newGame.addEventListener("mouseover", (event) => {
         event.target.style.color = '#ff5a1e';
     });
-
     newGame.addEventListener("mouseout", (event) => {
         event.target.style.color = '';
     })
@@ -106,15 +104,6 @@ function locateImages() {
         })
 }
 
-// function locateImagesHardLevel() {
-//     getImages()
-//         .then(images => {
-//             images.forEach(img => {
-//                 const imageContainer = creteImagesContainer(img);
-//                 picturesHardlevel.appendChild(imageContainer)
-//             })
-//         })
-// }
 
 
 function clicks(event) {
@@ -138,26 +127,43 @@ function updatePuzzleBackground() {
         puzzleDivs.forEach((puzzleDiv) => {
             puzzleDiv.style.backgroundImage = `url(${imgSrc})`;
 
-            const lastPuzzle = document.querySelector("#last")
+            const lastPuzzle = document.getElementById("9")
             lastPuzzle.style.backgroundImage = "none"
         });
-
     }
 }
 
 
+
 function initGame() {
     const board = document.querySelector(".board");
-    // const boardHardLevel = document.querySelector(".boardHardLevel");
+    // const puzzleArray = Array.from(document.querySelector('.board').children)
 
-    const puzzleArray = Array.from(document.querySelector('.board').children)
-    console.log(puzzleArray)
-    // let puzzleArrayHard = Array.from(document.querySelector('.boardHardLevel').children)
+    const puzzleElements =Array.from(document.querySelectorAll(".puzzle"));
+    const initialPuzzles = Array.from(puzzleElements).map(element => element.id)
+    const endPuzzles = Array.from(puzzleElements).map(element => element.id)
+
+
+    function showInitialState() {
+        console.log("Stan początkowy:");
+        const board = document.querySelector(".board");
+        const initialPuzzles = board.innerHTML;
+        console.log(initialPuzzles);
+        }
+
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array
+    }
 
 
     let puzzleState = []
-    for (let i = 0; i < puzzleArray.length; i += 3) {
-        let row = puzzleArray.slice(i, i + 3);
+    for (let i = 0; i < puzzleElements.length; i += 3) {
+        let row = puzzleElements.slice(i, i + 3);
         puzzleState.push(row);
     }
 
@@ -166,15 +172,17 @@ function initGame() {
         puzzleState.forEach((row, rowIndex) => {
             row.forEach((column, columnIndex) => {
 
-                let reversedRowIndex = puzzleState.length -1 - rowIndex;
-                let reversedColumnIndex = puzzleState.length -1 - columnIndex;
                 column.style.top = `${rowIndex * 200}px`;
                 column.style.left = `${columnIndex * 200}px`;
+
+
+                let reversedRowIndex = puzzleState.length -1 - rowIndex;
+                let reversedColumnIndex = puzzleState.length -1 - columnIndex;
+
                 column.style['background-position-y'] = `-${reversedRowIndex * 200}px`;
                 column.style['background-position-x'] = `-${reversedColumnIndex * 200}px`;
+
                 board.appendChild(column);
-
-
             });
         });
     }
@@ -204,7 +212,7 @@ function initGame() {
             }
         }
 
-        const emptyPuzzle = document.querySelector(('#last'));
+        const emptyPuzzle = document.getElementById(('9'));
         let puzzleEmptyX, puzzleEmptyY;
         for (let i = 0; i < puzzleState.length; i++) {
             if (puzzleState[i].includes(emptyPuzzle)) {
@@ -223,7 +231,11 @@ function initGame() {
             puzzleState[puzzleX][puzzleY] = puzzleState[puzzleEmptyX][puzzleEmptyY];
             puzzleState[puzzleEmptyX][puzzleEmptyY] = temp;
             steps++
+
+            isGameFinished()
+
             statistics()
+
 
         }
     }
@@ -236,11 +248,22 @@ function initGame() {
     puzzleState.forEach(row => {
         row.forEach(puzzle => {
             puzzle.addEventListener('click', movePuzzle);
+
         });
     });
 
 
     function statistics() {
         document.querySelector("#steps").textContent = steps
+    }
+
+
+    function isGameFinished() {
+        const puzzles = board.getElementsByClassName("puzzle");
+        const finalPuzzles = Array.from(puzzles).map(puzzle => puzzle.innerHTML).sort();
+        console.log(finalPuzzles)
+        if (finalPuzzles === ["9", "8", "7", "6", "5", "4", "3", "2", "1"]) {
+            window.alert("koniec'")
+        }
     }
 }

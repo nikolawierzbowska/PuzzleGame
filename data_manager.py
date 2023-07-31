@@ -29,10 +29,14 @@ def get_players_list(cursor):
     return cursor.fetchall()
 
 
+
 @connection.connection_handler
-def get_players_results(cursor):
+def add_players_results(cursor, player_name, email):
     cursor.execut("""
-                 SELECT results
-                 FROM players
-                 """)
-    return cursor.fetchall()
+                 UPDATE players
+                 SET results = results+15
+                 WHERE player_name = %(player_name)s or email = %(email)s 
+                 """,
+                {"player_name":player_name, "email":email})
+
+

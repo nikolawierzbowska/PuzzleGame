@@ -22,5 +22,12 @@
 {% endblock %}
 
 {% block main %}
+     {% if not is_logged %}
+
+         <p class="begin">Please login or register if you would like to play puzzle</p>
+
+
+     {% endif %}
+    <br><br><br><br>
 {% endblock %}
 
