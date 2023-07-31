@@ -137,28 +137,9 @@ function updatePuzzleBackground() {
 
 function initGame() {
     const board = document.querySelector(".board");
-    // const puzzleArray = Array.from(document.querySelector('.board').children)
+
 
     const puzzleElements =Array.from(document.querySelectorAll(".puzzle"));
-    const initialPuzzles = Array.from(puzzleElements).map(element => element.id)
-    const endPuzzles = Array.from(puzzleElements).map(element => element.id)
-
-
-    function showInitialState() {
-        console.log("Stan początkowy:");
-        const board = document.querySelector(".board");
-        const initialPuzzles = board.innerHTML;
-        console.log(initialPuzzles);
-        }
-
-
-    function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array
-    }
 
 
     let puzzleState = []
@@ -231,12 +212,7 @@ function initGame() {
             puzzleState[puzzleX][puzzleY] = puzzleState[puzzleEmptyX][puzzleEmptyY];
             puzzleState[puzzleEmptyX][puzzleEmptyY] = temp;
             steps++
-
-            isGameFinished()
-
             statistics()
-
-
         }
     }
 
@@ -258,12 +234,4 @@ function initGame() {
     }
 
 
-    function isGameFinished() {
-        const puzzles = board.getElementsByClassName("puzzle");
-        const finalPuzzles = Array.from(puzzles).map(puzzle => puzzle.innerHTML).sort();
-        console.log(finalPuzzles)
-        if (finalPuzzles === ["9", "8", "7", "6", "5", "4", "3", "2", "1"]) {
-            window.alert("koniec'")
-        }
-    }
 }
